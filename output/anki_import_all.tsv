@@ -1,0 +1,69 @@
+"<div class='topic'>Python</div>
+<div class='question-text'>Which of the following operators performs floor division in Python?</div>
+<ul class='options'><li>a) /</li><li>b) //</li><li>c) %</li><li>d) div</li></ul>"	"<div class=""answer-key""><b>Correct Answer:</b> B</div>
+<div class=""explanation"">The // operator returns the integral part of the quotient by truncating fractional digits towards negative infinity.</div>"
+"<div class='topic'>Python</div>
+<div class='question-text'>What is the value of the expression
+13 % 4
+?</div>
+<pre><code class='language-python'>13 % 4</code></pre>
+<ul class='options'><li>a) 1</li><li>b) 3</li><li>c) 3.25</li><li>d) 0</li></ul>"	"<div class=""answer-key""><b>Correct Answer:</b> A</div>
+<div class=""explanation"">The modulus operator (
+%)
+ returns the remainder of the division. 13 divided by 4 leaves a remainder of 1.</div>"
+"<div class='topic'>Python</div>
+<div class='question-text'>What will be the output of the following Python expression?
+print(2 ** 3 ** 2)</div>
+<pre><code class='language-python'>print(2 ** 3 ** 2)</code></pre>
+<ul class='options'><li>a) 64</li><li>b) 512</li><li>c) 256</li><li>d) 81</li></ul>"	"<div class=""answer-key""><b>Correct Answer:</b> B</div>
+<div class=""explanation"">The exponentiation operator (**)
+has right-to-left associativity. Therefore,
+2 ** 3 ** 2
+is evaluated as
+2 ** (3 ** 2) = 2 ** 9 = 512.</div>"
+"<div class='topic'>Python</div>
+<div class='question-text'>What is the output of the following Python code?
+x = 10
+y = 3
+print(x // y)</div>
+<pre><code class='language-python'>x = 10
+y = 3
+print(x // y)</code></pre>
+<ul class='options'><li>a) 3.33</li><li>b) 3</li><li>c) 3.0</li><li>d) 1</li></ul>"	"<div class=""answer-key""><b>Correct Answer:</b> B</div>
+<div class=""explanation"">The // operator performs floor division in Python, returning the integer part of the quotient.</div>"
+"<div class='topic'>Python</div>
+<div class='question-text'>Which of the following operator precedence order is correct in Python?</div>
+<ul class='options'><li>a) Addition, Multiplication, Exponentiation</li><li>b) Exponentiation, Multiplication, Addition</li><li>c) Multiplication, Exponentiation, Addition</li><li>d) Exponentiation, Addition, Multiplication</li></ul>"	"<div class=""answer-key""><b>Correct Answer:</b> B</div>
+<div class=""explanation"">In Python, exponentiation (**) has higher precedence than multiplication (*), which takes precedence over addition (+).</div>"
+"<div class='topic'>Python</div>
+<div class='question-text'>What is the output of the following expression in Python?</div>
+<pre><code class='language-python'>print(2 ** 3 ** 2)</code></pre>
+<ul class='options'><li>a) 64</li><li>b) 512</li><li>c) 81</li><li>d) 256</li></ul>"	"<div class=""answer-key""><b>Correct Answer:</b> B</div>
+<div class=""explanation"">The exponentiation operator ** has right-to-left associativity in Python. Therefore, 2 ** 3 ** 2 is evaluated as 2 ** (3 ** 2) = 2 ** 9 = 512.</div>"
+"<div class='topic'>Python</div>
+<div class='question-text'>Which of the following operator is used for floor division in Python?</div>
+<ul class='options'><li>a) /</li><li>b) //</li><li>c) %</li><li>d) ^</li></ul>"	"<div class=""answer-key""><b>Correct Answer:</b> B</div>
+<div class=""explanation"">The // operator performs floor division, returning the integer quotient truncated towards negative infinity.</div>"
+"<div class='topic'>Python</div>
+<div class='question-text'>What will be the output of the following Python code?</div>
+<pre><code class='language-python'>a = [1, 2, 3]
+b = a
+b.append(4)
+print(a)</code></pre>
+<ul class='options'><li>a) [1, 2, 3]</li><li>b) [1, 2, 3, 4]</li><li>c) [4, 1, 2, 3]</li><li>d) AttributeError</li></ul>"	"<div class=""answer-key""><b>Correct Answer:</b> B</div>
+<div class=""explanation"">Lists in Python are mutable objects. Assigning b = a creates a reference to the same list object in memory, so mutating b also affects a.</div>"
+"<div class='topic'>Python</div>
+<div class='question-text'>What is the output of the following Python expression?
+print(2 ** 3 ** 2)</div>
+<pre><code class='language-python'>print(2 ** 3 ** 2)</code></pre>
+<ul class='options'><li>a) 64</li><li>b) 512</li><li>c) 256</li><li>d) 12</li></ul>"	"<div class=""answer-key""><b>Correct Answer:</b> B</div>
+<div class=""explanation"">The exponentiation operator
+**
+has right-to-left associativity in Python. Therefore,
+2 ** 3 ** 2
+is evaluated as
+2 ** (3 ** 2)
+=
+2 ** 9
+=
+512.</div>"

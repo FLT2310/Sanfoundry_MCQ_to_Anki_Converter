@@ -1,0 +1,51 @@
+This section on Python Multiple Choice Questions & Answers (MCQs) focuses on "Basic Operators".
+1. What is the output of the following Python expression?
+print(2 ** 3 ** 2)
+a) 64
+b) 512
+c) 256
+d) 12
+View Answer
+Answer: b
+Explanation:
+The exponentiation operator
+**
+has right-to-left associativity in Python. Therefore,
+2 ** 3 ** 2
+is evaluated as
+2 ** (3 ** 2)
+=
+2 ** 9
+=
+512
+.
+2. What will be the output of the following Python code?
+a = [1, 2, 3]
+b = a
+b.append(4)
+print(a)
+a) [1, 2, 3]
+b) [1, 2, 3, 4]
+c) [4, 1, 2, 3]
+d) AttributeError
+View Answer
+Answer: b
+Explanation:
+Lists in Python are mutable objects. Assigning
+b = a
+creates a reference to the same list object in memory, so mutating
+b
+also affects
+a
+.
+3. Which of the following operator is used for floor division in Python?
+a) /
+b) //
+c) %
+d) ^
+View Answer
+Answer: b
+Explanation:
+The
+//
+operator performs floor division, returning the integer quotient truncated towards negative infinity.

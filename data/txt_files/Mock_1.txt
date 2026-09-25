@@ -1,0 +1,45 @@
+Basic Operators - Python Questions and Answers
+This section on Python Multiple Choice Questions & Answers (MCQs) focuses on "Basic Operators".
+1. What will be the output of the following Python expression?
+print(2 ** 3 ** 2)
+a) 64
+b) 512
+c) 256
+d) 81
+View Answer
+Answer:
+b
+Explanation:
+The exponentiation operator (
+**
+) in Python has right-to-left associativity. Therefore,
+2 ** 3 ** 2
+is evaluated as
+2 ** (3 ** 2) = 2 ** 9 = 512
+.
+2. Which of the following operators performs floor division in Python?
+a) /
+b) //
+c) %
+d) div
+View Answer
+Answer:
+b
+Explanation:
+The
+//
+operator returns the integral part of the quotient by truncating fractional digits towards negative infinity.
+3. What is the value of the expression
+13 % 4
+?
+a) 1
+b) 3
+c) 3.25
+d) 0
+View Answer
+Answer:
+a
+Explanation:
+The modulus operator (
+%
+) returns the remainder of the division. 13 divided by 4 leaves a remainder of 1.

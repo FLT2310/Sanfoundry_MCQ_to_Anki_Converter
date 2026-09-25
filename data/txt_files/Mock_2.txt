@@ -1,0 +1,50 @@
+Python Multiple Choice Questions - Basic Operators
+This section covers Python Multiple Choice Questions and Answers on Basic Operators.
+1. What is the output of the following Python code?
+x = 10
+y = 3
+print(x // y)
+a) 3.33
+b) 3
+c) 3.0
+d) 1
+View Answer
+Answer:
+b
+Explanation:
+The
+//
+operator performs floor division in Python, returning the integer part of the quotient.
+2. What is the output of the following expression in Python?
+print(2 ** 3 ** 2)
+a) 64
+b) 512
+c) 81
+d) 256
+View Answer
+Answer:
+b
+Explanation:
+The exponentiation operator
+**
+has right-to-left associativity in Python. Therefore,
+2 ** 3 ** 2
+is evaluated as
+2 ** (3 ** 2) = 2 ** 9 = 512
+.
+3. Which of the following operator precedence order is correct in Python?
+a) Addition, Multiplication, Exponentiation
+b) Exponentiation, Multiplication, Addition
+c) Multiplication, Exponentiation, Addition
+d) Exponentiation, Addition, Multiplication
+View Answer
+Answer:
+b
+Explanation:
+In Python, exponentiation (
+**
+) has higher precedence than multiplication (
+*
+), which takes precedence over addition (
++
+).
