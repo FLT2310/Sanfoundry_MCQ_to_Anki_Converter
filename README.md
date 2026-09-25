@@ -1,59 +1,87 @@
-# Sanfoundry MCQ to Anki Converter
+# Sanfoundry to Anki Converter
 
 An automated pipeline designed to extract Python Multiple Choice Questions (MCQs) from raw Sanfoundry HTML pages, structure broken code snippets using a local Large Language Model (LLM via LM Studio), and format the output into an Anki-ready `.tsv` import file.
+
+---
+
+## Key Features
+
+- **Automated Text Extraction**: Cleans raw HTML pages downloaded using browser extensions (e.g., SingleFile) and extracts target MCQ sections.
+- **Local AI Structuring**: Uses a locally hosted LLM (e.g., Qwen2.5-Coder-7B) to fix broken Python syntax, construct valid code blocks, and output structured JSON.
+- **Concurrent Processing**: Utilizes `ThreadPoolExecutor` in `02_generate_anki_cards.py` for faster batch processing across multiple requests.
+- **Fail-Safe & Resume**: Maintains `processed_files.log` and uses file locking (`threading.Lock`) to safely append rows to the TSV file and avoid re-processing on script restart.
+- **Custom Styling Support:** Includes card styling templates (CSS) to make reviewing questions visually clean and readable in Anki.
+- **Pre-bundled Test Data:** Includes 3 complete sample HTML files and pre-generated output files for immediate testing and inspection.
 
 ---
 
 ## Pipeline Overview
 
 ```
-[ data/html_files/ ] ──( 01_extract_questions.py )──> [ data/txt_files/ ] ──( 02_generate_anki_cards.py + Local LLM )──> [ output/anki_import_all.tsv ]
+[ HTML Files ] ──( 01_parse_html.py )──> [ Raw .txt Files ] ──( 02_generate_anki_cards.py + Local LLM )──> [ Anki TSV Output ]
 ```
 
-1. **HTML Extraction (`01_extract_questions.py`)**: Strips advertisements, navigation elements, headers, and footers from downloaded HTML pages, extracting raw question sections into individual `.txt` files in `data/txt_files/`.
-2. **AI Formatting (`02_generate_anki_cards.py`)**: Queries a local LLM running in LM Studio using multithreading to fix code indentation, parse options, isolate correct answers/explanations, and format each question into styled Anki Front/Back HTML fields saved to `output/anki_import_all.tsv`.
-3. **Log & Resume (`output/processed_files.log`)**: Tracks completed files so batch processing can be paused and resumed without duplicating effort.
+1. **HTML Extraction (`01_parse_html.py`)**: Strips advertisements, navigation elements, headers, and footers from downloaded HTML pages, extracting the raw question sections into individual `.txt` files.
+2. **AI Formatting (`02_generate_anki_cards.py`)**: Queries a local LLM running in LM Studio using multithreading to fix code indentation, parse options, isolate correct answers/explanations, and format each question into styled Anki Front/Back HTML fields.
+3. **Log & Resume (`processed_files.log`)**: Tracks processed files so the batch run can be paused and resumed without duplicating effort or overwriting existing output.
 
 ---
 
-## Directory Structure
+## Included Sample Data & Output
 
-```text
-.
-├── data/
-│   ├── html_files/         # Input: Raw Sanfoundry HTML pages
-│   └── txt_files/          # Intermediate: Cleaned question text files
-├── output/
-│   ├── anki_import_all.tsv # Output: Formatted Anki flashcard batch file
-│   └── processed_files.log # Progress tracking log (auto-generated)
-├── 01_extract_questions.py  # Step 1: HTML parsing & text extraction
-├── 02_generate_anki_cards.py# Step 2: Local LLM integration & Anki TSV generator
-└── README.md
+To make exploring this project as easy as possible without needing to execute any code, **3 sample HTML test pages** along with all corresponding **pre-generated output files** are included in this repository.
+
+* **No execution required:** Visitors do not need to set up or run the Python scripts locally just to evaluate the results.
+* **Ready to test:** You can inspect the parsed output files directly or import `output/anki_import_all.tsv` straight into Anki right away to see how the conversion works.
+
+---
+
+## Visual Overview & Screenshots
+
+### 1. Importing Cards into Anki
+*Shows the process of adding cards into Anki via the generated output file:*
+
+![Importing Cards into Anki](screenshots/Screenshot_1.png)
+
+### 2. Question View & Custom CSS Styling
+*How an imported MCQ appears to the user during a study session in Anki with applied styles:*
+
+![Anki Question Perspective](screenshots/Screenshot_2.png)
+
+---
+
+## Setup & Virtual Environment Installation
+
+Follow these steps to set up the project locally within an isolated Python virtual environment.
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/FLT2310/Sanfoundry_MCQ_to_Anki_Converter.git
+cd Sanfoundry_MCQ_to_Anki_Converter.git
 ```
 
----
+### 2. Create and Activate a Virtual Environment
 
-## Features
+* **On Linux / macOS:**
+  ```bash
+  python3 -m venv venv
+  source venv/bin/activate
+  ```
 
-- **Automated Text Extraction**: Cleans raw HTML pages downloaded using browser extensions (e.g., SingleFile) and extracts target MCQ sections.
-- **Local AI Structuring**: Uses a locally hosted LLM (e.g., Qwen2.5-Coder-7B) to fix broken Python syntax, construct valid code blocks, and output structured JSON.
-- **Concurrent Processing**: Utilizes `ThreadPoolExecutor` in `02_generate_anki_cards.py` for faster batch processing across multiple requests.
-- **Fail-Safe & Resume**: Maintains `output/processed_files.log` and uses thread locking (`threading.Lock`) to safely append rows to the TSV file without corruption or re-processing on restarts.
-- **Anki-Ready Styling**: Generates HTML with predefined classes (`.topic`, `.question-text`, `.options`, `.answer-key`, `.explanation`) for custom Anki card styling.
+* **On Windows (PowerShell):**
+  ```powershell
+  python -m venv venv
+  .\venv\Scripts\Activate.ps1
+  ```
 
----
-
-## Prerequisites
-
-### 1. Python Dependencies
-
-Install the required Python packages:
+### 3. Install Dependencies
+With your virtual environment active, install the required packages:
 
 ```bash
 pip install beautifulsoup4 requests
 ```
 
-### 2. LM Studio Setup
+### 4. LM Studio Setup
 
 1. Download and install [LM Studio](https://lmstudio.ai/).
 2. Download a coding-capable model such as `qwen2.5-coder-7b-instruct-q4_k_m.gguf`.
@@ -62,48 +90,60 @@ pip install beautifulsoup4 requests
 
 ---
 
-## How to Use
+## Usage Instructions
 
-### Step 1: Prepare HTML Files
-Save your target Sanfoundry HTML files into the `data/html_files/` directory.
+### Running the Scripts
 
-### Step 2: Extract Question Text
-Run `01_extract_questions.py` to strip webpage noise and extract raw MCQ text into `.txt` files:
+1. Place your target Sanfoundry HTML files in the `data/html_files/` directory (or use the provided `Mock_1.html`, `Mock_2.html`, `Mock_3.html` files).
+2. Run the HTML parser script to extract raw text data:
 
 ```bash
-python 01_extract_questions.py
+python 01_parse_html.py
 ```
-*Outputs generated `.txt` files to `data/txt_files/`.*
 
-### Step 3: Generate Anki Cards with Local AI
-Ensure your LM Studio local server is running, then execute `02_generate_anki_cards.py`:
+3. Run the generator script to assemble the final Anki import file:
 
 ```bash
 python 02_generate_anki_cards.py
 ```
-*Appends formatted cards to `output/anki_import_all.tsv` and logs completed files to `output/processed_files.log`.*
+
+### Importing into Anki
+
+1. Open Anki and click **File > Import...**
+2. Choose `output/anki_import_all.tsv`.
+3. Ensure the fields match your desired Note Type (Question, Options, Answer, Explanation).
+4. *(Optional)* Copy the custom CSS provided in `styles/card_style.css` into your Anki Deck's **Styling** section to apply custom typography and layout formatting.
 
 ---
 
-## Importing into Anki
+## Project Structure
 
-1. Open **Anki** and click **Import File**.
-2. Select `output/anki_import_all.tsv`.
-3. Set the following import options:
-   - **Type**: Basic (or a custom note type matching your styling preferences).
-   - **Fields separated by**: `Tab`.
-   - **Allow HTML in fields**: `Checked / Enabled`.
-   - **Field Mapping**:
-     - Field 1 -> `Front`
-     - Field 2 -> `Back`
-4. Click **Import**.
+```text
+.
+├── data/
+│   ├── html_files/
+│   │   ├── Mock_1.html
+│   │   ├── Mock_2.html
+│   │   └── Mock_3.html
+│   └── txt_files/
+│       ├── Mock_1.txt
+│       ├── Mock_2.txt
+│       └── Mock_3.txt
+├── output/
+│   ├── anki_import_all.tsv
+│   └── processed_files.log
+├── screenshots/
+│   ├── Screenshot_1.png
+│   └── Screenshot_2.png
+├── styles/
+│   └── card_style.css
+├── 01_parse_html.py
+├── 02_generate_anki_cards.py
+└── README.md
+```
 
 ---
 
-## Customization
+## License
 
-You can adjust processing parameters inside `02_generate_anki_cards.py`:
-
-- **LM Studio Endpoint**: Change `LM_STUDIO_URL` if your local server runs on a different port.
-- **Model Name**: Update `payload["model"]` to match the model identifier loaded in your LM Studio instance.
-- **Thread Count**: Modify `MAX_WORKERS` to increase or decrease parallel API requests depending on your hardware capacity.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
